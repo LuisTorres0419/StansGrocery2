@@ -8,16 +8,20 @@
         Dim secondArry() As String
         Dim thirdArray() As String
 
+        For i = LBound(temp) To UBound(temp) - 1
 
-        For Each foods In temp
 
-            secondArry = Split(foods, $"{Chr(34)},{Chr(34)}")
+
+            secondArry = Split(temp(i), $"{Chr(34)},{Chr(34)}")
             thirdArray = Split(secondArry(0), "$$TM")
+            food$(i, 0) = thirdArray(1)
             Console.WriteLine(thirdArray(1))
             thirdArray = Split(secondArry(1), "##LOC")
+            food$(i, 1) = thirdArray(1)
             Console.WriteLine(thirdArray(1))
             thirdArray = Split(secondArry(2), "%%CAT")
             thirdArray = Split(thirdArray(1), Chr(34))
+            food$(i, 2) = thirdArray(0)
             Console.WriteLine(thirdArray(0))
 
 
