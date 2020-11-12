@@ -28,8 +28,8 @@ Partial Class StansGroceryForm
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.SearchTextBox = New System.Windows.Forms.TextBox()
+        Me.DisplayComboBox = New System.Windows.Forms.ComboBox()
         Me.DisplayListBox = New System.Windows.Forms.ListBox()
         Me.LookUpLabel = New System.Windows.Forms.Label()
         Me.SelectLabel = New System.Windows.Forms.Label()
@@ -38,8 +38,13 @@ Partial Class StansGroceryForm
         Me.DisplayLabel = New System.Windows.Forms.Label()
         Me.LookUpItem = New System.Windows.Forms.ToolTip(Me.components)
         Me.ItemSelect = New System.Windows.Forms.ToolTip(Me.components)
+        Me.FilterGroupBox = New System.Windows.Forms.GroupBox()
+        Me.AisleRadioButton = New System.Windows.Forms.RadioButton()
+        Me.CatagoryRadioButton = New System.Windows.Forms.RadioButton()
+        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.TopMenuStrip.SuspendLayout()
         Me.LeftGroupBox.SuspendLayout()
+        Me.FilterGroupBox.SuspendLayout()
         Me.SuspendLayout()
         '
         'TopMenuStrip
@@ -49,7 +54,7 @@ Partial Class StansGroceryForm
         Me.TopMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileTopMenuItem, Me.HelpTopMenuItem})
         Me.TopMenuStrip.Location = New System.Drawing.Point(0, 0)
         Me.TopMenuStrip.Name = "TopMenuStrip"
-        Me.TopMenuStrip.Size = New System.Drawing.Size(1250, 40)
+        Me.TopMenuStrip.Size = New System.Drawing.Size(1250, 48)
         Me.TopMenuStrip.TabIndex = 0
         Me.TopMenuStrip.Text = "MenuStrip1"
         '
@@ -57,20 +62,20 @@ Partial Class StansGroceryForm
         '
         Me.FileTopMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExitToolStripMenuItem})
         Me.FileTopMenuItem.Name = "FileTopMenuItem"
-        Me.FileTopMenuItem.Size = New System.Drawing.Size(72, 38)
+        Me.FileTopMenuItem.Size = New System.Drawing.Size(72, 40)
         Me.FileTopMenuItem.Text = "&File"
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(359, 44)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(186, 44)
         Me.ExitToolStripMenuItem.Text = "Exit"
         '
         'HelpTopMenuItem
         '
         Me.HelpTopMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AboutTopMenuItem})
         Me.HelpTopMenuItem.Name = "HelpTopMenuItem"
-        Me.HelpTopMenuItem.Size = New System.Drawing.Size(85, 38)
+        Me.HelpTopMenuItem.Size = New System.Drawing.Size(85, 40)
         Me.HelpTopMenuItem.Text = "Help"
         '
         'AboutTopMenuItem
@@ -79,26 +84,26 @@ Partial Class StansGroceryForm
         Me.AboutTopMenuItem.Size = New System.Drawing.Size(214, 44)
         Me.AboutTopMenuItem.Text = "About"
         '
-        'TextBox1
+        'SearchTextBox
         '
-        Me.TextBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
-        Me.TextBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllSystemSources
-        Me.TextBox1.Location = New System.Drawing.Point(164, 88)
-        Me.TextBox1.Margin = New System.Windows.Forms.Padding(6)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(818, 31)
-        Me.TextBox1.TabIndex = 1
+        Me.SearchTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
+        Me.SearchTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllSystemSources
+        Me.SearchTextBox.Location = New System.Drawing.Point(164, 88)
+        Me.SearchTextBox.Margin = New System.Windows.Forms.Padding(6)
+        Me.SearchTextBox.Name = "SearchTextBox"
+        Me.SearchTextBox.Size = New System.Drawing.Size(818, 31)
+        Me.SearchTextBox.TabIndex = 1
         '
-        'ComboBox1
+        'DisplayComboBox
         '
-        Me.ComboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
-        Me.ComboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(164, 138)
-        Me.ComboBox1.Margin = New System.Windows.Forms.Padding(6)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(432, 33)
-        Me.ComboBox1.TabIndex = 2
+        Me.DisplayComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
+        Me.DisplayComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.DisplayComboBox.FormattingEnabled = True
+        Me.DisplayComboBox.Location = New System.Drawing.Point(164, 138)
+        Me.DisplayComboBox.Margin = New System.Windows.Forms.Padding(6)
+        Me.DisplayComboBox.Name = "DisplayComboBox"
+        Me.DisplayComboBox.Size = New System.Drawing.Size(432, 33)
+        Me.DisplayComboBox.TabIndex = 2
         '
         'DisplayListBox
         '
@@ -159,18 +164,50 @@ Partial Class StansGroceryForm
         Me.DisplayLabel.Size = New System.Drawing.Size(418, 394)
         Me.DisplayLabel.TabIndex = 0
         '
+        'FilterGroupBox
+        '
+        Me.FilterGroupBox.Controls.Add(Me.AisleRadioButton)
+        Me.FilterGroupBox.Controls.Add(Me.CatagoryRadioButton)
+        Me.FilterGroupBox.Location = New System.Drawing.Point(0, 190)
+        Me.FilterGroupBox.Name = "FilterGroupBox"
+        Me.FilterGroupBox.Size = New System.Drawing.Size(148, 408)
+        Me.FilterGroupBox.TabIndex = 1
+        Me.FilterGroupBox.TabStop = False
+        Me.FilterGroupBox.Text = "Filter"
+        '
+        'AisleRadioButton
+        '
+        Me.AisleRadioButton.AutoSize = True
+        Me.AisleRadioButton.Location = New System.Drawing.Point(0, 87)
+        Me.AisleRadioButton.Name = "AisleRadioButton"
+        Me.AisleRadioButton.Size = New System.Drawing.Size(90, 29)
+        Me.AisleRadioButton.TabIndex = 1
+        Me.AisleRadioButton.Text = "Aisle"
+        Me.AisleRadioButton.UseVisualStyleBackColor = True
+        '
+        'CatagoryRadioButton
+        '
+        Me.CatagoryRadioButton.AutoSize = True
+        Me.CatagoryRadioButton.Location = New System.Drawing.Point(0, 33)
+        Me.CatagoryRadioButton.Name = "CatagoryRadioButton"
+        Me.CatagoryRadioButton.Size = New System.Drawing.Size(130, 29)
+        Me.CatagoryRadioButton.TabIndex = 0
+        Me.CatagoryRadioButton.Text = "Catagory"
+        Me.CatagoryRadioButton.UseVisualStyleBackColor = True
+        '
         'StansGroceryForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1250, 667)
+        Me.Controls.Add(Me.FilterGroupBox)
         Me.Controls.Add(Me.LeftGroupBox)
         Me.Controls.Add(Me.SearchButton)
         Me.Controls.Add(Me.SelectLabel)
         Me.Controls.Add(Me.LookUpLabel)
         Me.Controls.Add(Me.DisplayListBox)
-        Me.Controls.Add(Me.ComboBox1)
-        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.DisplayComboBox)
+        Me.Controls.Add(Me.SearchTextBox)
         Me.Controls.Add(Me.TopMenuStrip)
         Me.MainMenuStrip = Me.TopMenuStrip
         Me.Margin = New System.Windows.Forms.Padding(6)
@@ -182,6 +219,8 @@ Partial Class StansGroceryForm
         Me.TopMenuStrip.ResumeLayout(False)
         Me.TopMenuStrip.PerformLayout()
         Me.LeftGroupBox.ResumeLayout(False)
+        Me.FilterGroupBox.ResumeLayout(False)
+        Me.FilterGroupBox.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -191,8 +230,8 @@ Partial Class StansGroceryForm
     Friend WithEvents FileTopMenuItem As ToolStripMenuItem
     Friend WithEvents HelpTopMenuItem As ToolStripMenuItem
     Friend WithEvents AboutTopMenuItem As ToolStripMenuItem
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents SearchTextBox As TextBox
+    Friend WithEvents DisplayComboBox As ComboBox
     Friend WithEvents DisplayListBox As ListBox
     Friend WithEvents LookUpLabel As Label
     Friend WithEvents SelectLabel As Label
@@ -202,4 +241,8 @@ Partial Class StansGroceryForm
     Friend WithEvents LookUpItem As ToolTip
     Friend WithEvents ItemSelect As ToolTip
     Friend WithEvents ExitToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents FilterGroupBox As GroupBox
+    Friend WithEvents AisleRadioButton As RadioButton
+    Friend WithEvents CatagoryRadioButton As RadioButton
+    Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
 End Class
