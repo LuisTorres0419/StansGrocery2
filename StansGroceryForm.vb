@@ -1,19 +1,19 @@
 ﻿Public Class StansGroceryForm
-    Dim food(255, 2) As String
+    Dim food(256, 2) As String
     Dim filter As Integer
 
     Sub LoadDisplayComboBox()
 
-        Dim filter As Integer = 2
+        'Dim filter As Integer = 2
+
         If filter = 2 Then
             SelectLabel.Text = "Aisle"
-        Else
+        ElseIf filter = 1 Then
             SelectLabel.Text = "Catagory"
         End If
         DisplayComboBox.Items.Clear()
 
         For i = LBound(food) To UBound(food) - 1
-
             If food(i, filter) <> "" And food$(i, filter) <> "  " And Not DisplayComboBox.Items.Contains(food(i, 2)) Then
                 DisplayComboBox.Items.Add(food(i, filter))
             End If
@@ -51,16 +51,21 @@
 
             secondArry = Split(temp(i), Chr(34) & "," & Chr(34))
             thirdArray = Split(secondArry(0), "$$ITM")
+            Console.Write(thirdArray(1))
             food$(i, 0) = thirdArray(1)
-
             thirdArray = Split(secondArry(1), "##LOC")
             food$(i, 1) = thirdArray(1).PadLeft(2)
-
+            food$(i, 1) = thirdArray(1)
             thirdArray = Split(secondArry(2), "%%CAT")
             thirdArray = Split(thirdArray(1), Chr(34))
             food$(i, 2) = thirdArray(0)
-
+            food$(i, 2) = thirdArray(0)
         Next
+
+        Console.WriteLine(My.Resources.Grocery)
+
+
+
 
     End Sub
 
@@ -100,26 +105,19 @@
 
     End Sub
 
-
     Private Sub DisplayComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DisplayComboBox.SelectedIndexChanged
         If DisplayComboBox.SelectedIndex <> -1 Then
             LoadDisplayListbox()
         End If
-
     End Sub
 
     Private Sub FilterGroupBox_Enter(sender As Object, e As EventArgs) Handles FilterGroupBox.Enter
-        If CatagoryRadioButton.Checked Then
+        If AisleRadioButton.Checked Then
             Me.filter = 2
-        Else
+        ElseIf CatagoryRadioButton.Checked Then
             Me.filter = 1
         End If
         LoadDisplayComboBox()
     End Sub
-
-    Private Sub SearchTextBox_TextChanged(sender As Object, e As EventArgs) Handles SearchTextBox.TextChanged
-
-    End Sub
-
 
 End Class

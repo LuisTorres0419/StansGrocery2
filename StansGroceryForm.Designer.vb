@@ -54,7 +54,7 @@ Partial Class StansGroceryForm
         Me.TopMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileTopMenuItem, Me.HelpTopMenuItem})
         Me.TopMenuStrip.Location = New System.Drawing.Point(0, 0)
         Me.TopMenuStrip.Name = "TopMenuStrip"
-        Me.TopMenuStrip.Size = New System.Drawing.Size(1250, 48)
+        Me.TopMenuStrip.Size = New System.Drawing.Size(1250, 40)
         Me.TopMenuStrip.TabIndex = 0
         Me.TopMenuStrip.Text = "MenuStrip1"
         '
@@ -62,7 +62,7 @@ Partial Class StansGroceryForm
         '
         Me.FileTopMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExitToolStripMenuItem})
         Me.FileTopMenuItem.Name = "FileTopMenuItem"
-        Me.FileTopMenuItem.Size = New System.Drawing.Size(72, 40)
+        Me.FileTopMenuItem.Size = New System.Drawing.Size(72, 36)
         Me.FileTopMenuItem.Text = "&File"
         '
         'ExitToolStripMenuItem
@@ -75,7 +75,7 @@ Partial Class StansGroceryForm
         '
         Me.HelpTopMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AboutTopMenuItem})
         Me.HelpTopMenuItem.Name = "HelpTopMenuItem"
-        Me.HelpTopMenuItem.Size = New System.Drawing.Size(85, 40)
+        Me.HelpTopMenuItem.Size = New System.Drawing.Size(85, 36)
         Me.HelpTopMenuItem.Text = "Help"
         '
         'AboutTopMenuItem
