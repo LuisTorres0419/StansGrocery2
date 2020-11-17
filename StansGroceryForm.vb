@@ -2,6 +2,11 @@
 Option Strict On
 Option Explicit On
 
+'Luis Torres
+'RCET0265
+'Fall 2020
+'Grocery store
+'https://github.com/LuisTorres0419/StansGrocery2.git
 Public Class StansGroceryForm
     Dim food(256, 2), number(23, 0) As String
     Dim filter As Integer
