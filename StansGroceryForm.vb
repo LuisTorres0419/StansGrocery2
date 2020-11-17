@@ -22,18 +22,25 @@ Public Class StansGroceryForm
         End If
         DisplayComboBox.Items.Clear()
 
+        Try
+            'look in to crash
+            For i = LBound(food) To UBound(food) - 1
+                If food(i, filter) <> "" And food$(i, filter) <> "  " And Not DisplayComboBox.Items.Contains(food(i, filter)) Then
+                    DisplayComboBox.Items.Add(food(i, filter))
 
-        For i = LBound(food) To UBound(food) - 1
-            If food(i, filter) <> "" And food$(i, filter) <> "  " And Not DisplayComboBox.Items.Contains(food(i, 2)) Then
-                DisplayComboBox.Items.Add(food(i, filter))
-            End If
-        Next
+                End If
+            Next
 
+        Catch ex As Exception
 
+        End Try
 
         DisplayComboBox.Sorted = True
 
         DisplayComboBox.Items.Insert(0, " ~Show All~")
+
+        DisplayComboBox.SelectedIndex = 0
+
     End Sub
 
     Sub LoadDisplayListbox()
@@ -67,11 +74,11 @@ Public Class StansGroceryForm
             food$(i, 0) = thirdArray(1)
             thirdArray = Split(secondArry(1), "##LOC")
             food$(i, 1) = thirdArray(1).PadLeft(2)
-            food$(i, 1) = thirdArray(1)
+
             thirdArray = Split(secondArry(2), "%%CAT")
             thirdArray = Split(thirdArray(1), Chr(34))
             food$(i, 2) = thirdArray(0)
-            food$(i, 2) = thirdArray(0)
+
         Next
 
         Console.WriteLine(My.Resources.Grocery)
@@ -79,6 +86,7 @@ Public Class StansGroceryForm
 
     Private Sub StansGroceryForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadDataFile()
+        CatagoryRadioButton.Checked = True
     End Sub
 
     Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
