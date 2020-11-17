@@ -1,23 +1,35 @@
-﻿Public Class StansGroceryForm
-    Dim food(256, 2) As String
+﻿Option Compare Text
+Option Strict On
+Option Explicit On
+
+Public Class StansGroceryForm
+    Dim food(256, 2), number(23, 0) As String
     Dim filter As Integer
+
+    Sub Numbers()
+
+    End Sub
+
 
     Sub LoadDisplayComboBox()
 
-        'Dim filter As Integer = 2
-
-        If filter = 2 Then
+        If filter = 1 Then
             SelectLabel.Text = "Aisle"
-        ElseIf filter = 1 Then
+            Numbers()
+        ElseIf filter = 2 Then
             SelectLabel.Text = "Catagory"
+
         End If
         DisplayComboBox.Items.Clear()
+
 
         For i = LBound(food) To UBound(food) - 1
             If food(i, filter) <> "" And food$(i, filter) <> "  " And Not DisplayComboBox.Items.Contains(food(i, 2)) Then
                 DisplayComboBox.Items.Add(food(i, filter))
             End If
         Next
+
+
 
         DisplayComboBox.Sorted = True
 
@@ -37,7 +49,7 @@
         Next
 
         DisplayListBox.Sorted = True
-
+        DisplayComboBox.Items.Remove("  ")
     End Sub
 
     Sub LoadDataFile()
@@ -63,10 +75,6 @@
         Next
 
         Console.WriteLine(My.Resources.Grocery)
-
-
-
-
     End Sub
 
     Private Sub StansGroceryForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -78,11 +86,14 @@
     End Sub
 
     Private Sub DisplayListBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DisplayListBox.SelectedIndexChanged
-        If DisplayListBox.SelectedIndex <> -1 Then
-            DisplayComboBox.SelectedIndex = -1
-            DisplayLabel.Text = $"{DisplayListBox.SelectedItem.ToString}"
-        End If
-
+        For a = 0 To 255
+            For b = 0 To 2
+                If DisplayListBox.SelectedItem.ToString = food(a, b) Then
+                    DisplayLabel.Text = "You can find " & food(a, b) & " on aisle " &
+                        food(a, b + 1) & " with the " & food(a, b + 2)
+                End If
+            Next
+        Next
     End Sub
 
     Private Sub SearchButton_Click(sender As Object, e As EventArgs) Handles SearchButton.Click
@@ -111,13 +122,23 @@
         End If
     End Sub
 
-    Private Sub FilterGroupBox_Enter(sender As Object, e As EventArgs) Handles FilterGroupBox.Enter
-        If AisleRadioButton.Checked Then
-            Me.filter = 2
-        ElseIf CatagoryRadioButton.Checked Then
+    Private Sub FilterGroupBox_CheckedChanged(sender As Object, e As EventArgs) Handles AisleRadioButton.CheckedChanged, CatagoryRadioButton.CheckedChanged
+        If AisleRadioButton.Checked = True Then
             Me.filter = 1
+        ElseIf CatagoryRadioButton.Checked = True Then
+            Me.filter = 2
         End If
         LoadDisplayComboBox()
     End Sub
 
+    Private Sub SearchTextBox_TextChanged(sender As Object, e As EventArgs) Handles SearchTextBox.TextChanged
+
+        If SearchTextBox.TextLength = 1 Then
+            DisplayLabel.Text = "Please be more specific."
+            Exit Sub
+        ElseIf SearchTextBox.Text = "zzz" Then
+            Me.Close()
+        End If
+
+    End Sub
 End Class

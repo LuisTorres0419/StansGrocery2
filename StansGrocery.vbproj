@@ -73,6 +73,8 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DOMDocument30.vb" />
+    <Compile Include="MSXML2\IXMLDOMAttribute.vb" />
     <Compile Include="Regex.vb" />
     <Compile Include="StansGroceryForm.vb">
       <SubType>Form</SubType>
