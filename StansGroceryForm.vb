@@ -6,16 +6,11 @@ Public Class StansGroceryForm
     Dim food(256, 2), number(23, 0) As String
     Dim filter As Integer
 
-    Sub Numbers()
-
-    End Sub
-
 
     Sub LoadDisplayComboBox()
 
         If filter = 1 Then
             SelectLabel.Text = "Aisle"
-            Numbers()
         ElseIf filter = 2 Then
             SelectLabel.Text = "Catagory"
 
@@ -29,6 +24,7 @@ Public Class StansGroceryForm
                     DisplayComboBox.Items.Add(food(i, filter))
 
                 End If
+
             Next
 
         Catch ex As Exception
@@ -47,7 +43,7 @@ Public Class StansGroceryForm
         DisplayListBox.Items.Clear()
 
         For i = LBound(food) To UBound(food) - 1
-            If (food$(i, 0) <> "" And food$(i, Me.filter) = DisplayComboBox.SelectedIndex.ToString) Or
+            If (food$(i, 0) <> "" And food$(i, Me.filter) = DisplayComboBox.SelectedItem.ToString) Or
                (food$(i, 0) <> "" And DisplayComboBox.SelectedIndex = 0) Then
 
 
