@@ -6,6 +6,7 @@ Option Explicit On
 'RCET0265
 'Fall 2020
 'Grocery store
+'Helped By Lane Colman
 'https://github.com/LuisTorres0419/StansGrocery2.git
 Public Class StansGroceryForm
     Dim food(256, 2) As String
@@ -50,8 +51,6 @@ Public Class StansGroceryForm
         For i = LBound(food) To UBound(food) - 1
             If (food$(i, 0) <> "" And food$(i, Me.filter) = DisplayComboBox.SelectedItem.ToString) Or
                (food$(i, 0) <> "" And DisplayComboBox.SelectedIndex = 0) Then
-
-
                 DisplayListBox.Items.Add(food(i, 0))
             End If
         Next
