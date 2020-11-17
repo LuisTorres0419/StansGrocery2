@@ -8,7 +8,7 @@ Option Explicit On
 'Grocery store
 'https://github.com/LuisTorres0419/StansGrocery2.git
 Public Class StansGroceryForm
-    Dim food(256, 2), number(23, 0) As String
+    Dim food(256, 2) As String
     Dim filter As Integer
 
 
