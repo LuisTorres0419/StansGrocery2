@@ -149,4 +149,10 @@ Public Class StansGroceryForm
         End If
 
     End Sub
+
+    Private Sub AboutTopMenuItem_Click(sender As Object, e As EventArgs) Handles AboutTopMenuItem.Click
+        AboutForm.Show()
+        Me.Hide()
+
+    End Sub
 End Class
